@@ -4,7 +4,7 @@
  *
  * Muestra información de un usuario utilizando clases y funciones auxiliares.
  *
- * @author Juan José Acebedo López (jjal)
+ * @author Juan José Acebedo Lara (jjal)
  * @version 1.0
  */
 
