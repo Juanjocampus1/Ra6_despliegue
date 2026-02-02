@@ -3,7 +3,7 @@
  * Funciones auxiliares de la aplicación
  *
  * @package App
- * @author Juan José Acebedo López (jjal)
+ * @author Juan José Acebedo Lara (jjal)
  * @version 1.0
  */
 

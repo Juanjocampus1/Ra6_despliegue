@@ -1,7 +1,7 @@
 @echo off
 REM ====================================================
 REM Script para iniciar el proyecto PHP
-REM Autor: Juan José Acebedo López (jjal)
+REM Autor: Juan José Acebedo Lara (jjal)
 REM ====================================================
 
 echo.
