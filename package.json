@@ -15,7 +15,7 @@
     "mysql",
     "web-application"
   ],
-  "author": "Juan José Acebedo López (jjal)",
+  "author": "Juan José Acebedo Lara (jjal)",
   "license": "MIT",
   "devDependencies": {
     "phpdocumentor/phpdocumentor": "^3.0"

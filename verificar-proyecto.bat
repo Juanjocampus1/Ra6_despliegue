@@ -1,7 +1,7 @@
 @echo off
 REM ====================================================
 REM Script de verificación del proyecto
-REM Autor: Juan José Acebedo López (jjal)
+REM Autor: Juan José Acebedo Lara (jjal)
 REM ====================================================
 
 echo.
