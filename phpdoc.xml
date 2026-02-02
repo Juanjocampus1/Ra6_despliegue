@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor
+    configVersion="3"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://www.phpdoc.org"
+    xsi:schemaLocation="https://www.phpdoc.org https://raw.githubusercontent.com/phpDocumentor/phpDocumentor/master/data/xsd/phpdoc.xsd"
+>
+    <title>Proyecto PHP - Documentación JJAL</title>
+    <paths>
+        <output>/project/docs/html</output>
+        <cache>/project/.phpdoc/cache</cache>
+    </paths>
+    <version number="1.0.0">
+        <folder>latest</folder>
+        <api>
+            <source dsn="/project">
+                <path>src</path>
+                <path>index.php</path>
+            </source>
+        </api>
+    </version>
+</phpdocumentor>

@@ -1,0 +1,79 @@
+# Dependencias de Composer
+/vendor/
+composer.lock
+
+# Dependencias de Node
+/node_modules/
+package-lock.json
+
+# Logs de la aplicación
+/logs/*.log
+*.log
+
+# Documentación generada
+/docs/
+/doc/
+
+# Configuración local y sensible
+config.local.php
+.env
+.env.local
+*.secret
+
+# IDE - Visual Studio Code
+.vscode/
+*.code-workspace
+
+# IDE - PhpStorm
+.idea/
+*.iml
+
+# IDE - Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# IDE - Eclipse
+.buildpath
+.project
+.settings/
+
+# Sistema operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Archivos temporales
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Archivos de backup
+*.bak
+*.backup
+*.old
+
+# Caché de PHP
+*.cache
+cache/
+
+# Archivos de PHPDocumentor
+.phpdoc/
+
+# Archivos de testing
+/tests/coverage/
+phpunit.xml
+
+# Archivos de build
+/build/
+/dist/
+
+# Archivos específicos del proyecto
+DATABASE_CREDENTIALS.txt
+passwords.txt

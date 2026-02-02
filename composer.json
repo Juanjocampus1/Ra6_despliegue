@@ -1,0 +1,18 @@
+{
+  "name": "jjal/proyecto-php",
+  "description": "Proyecto PHP con documentación para DAW",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Juan José Acebedo López",
+      "email": "jjal@ejemplo.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {
+    "phpdocumentor/phpdocumentor": "^3.4"
+  }
+}

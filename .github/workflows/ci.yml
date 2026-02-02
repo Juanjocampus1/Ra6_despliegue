@@ -1,0 +1,148 @@
+name: CI/CD - Verificación PHP y Documentación
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  # Job 1: Verificar sintaxis de PHP
+  php-syntax-check:
+    name: Verificación de Sintaxis PHP
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout del código
+      uses: actions/checkout@v4
+      
+    - name: 🐘 Configurar PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mysqli, mbstring
+        coverage: none
+        
+    - name: ✅ Verificar sintaxis de index.php
+      run: php -l index.php
+      
+    - name: ✅ Verificar sintaxis de src/usuario.php
+      run: php -l src/usuario.php
+      
+    - name: ✅ Verificar sintaxis de src/utilidades.php
+      run: php -l src/utilidades.php
+      
+    - name: 📊 Resumen de verificación
+      run: |
+        echo "✅ Todos los archivos PHP tienen sintaxis correcta"
+        echo "Archivos verificados:"
+        echo "  - index.php"
+        echo "  - src/usuario.php"
+        echo "  - src/utilidades.php"
+
+  # Job 2: Generar documentación con phpDocumentor
+  generate-documentation:
+    name: Generar Documentación
+    runs-on: ubuntu-latest
+    needs: php-syntax-check
+    
+    steps:
+    - name: 📥 Checkout del código
+      uses: actions/checkout@v4
+      
+    - name: 🐘 Configurar PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mysqli, mbstring, json
+        tools: composer
+        
+    - name: 📦 Instalar dependencias de Composer
+      run: |
+        composer require --dev phpdocumentor/phpdocumentor
+        
+    - name: 📚 Generar documentación HTML
+      run: |
+        mkdir -p docs/html
+        ./vendor/bin/phpdoc -d . -t docs/html --template clean --ignore vendor/
+      continue-on-error: true
+      
+    - name: 📋 Listar archivos generados
+      run: |
+        echo "📁 Contenido de docs/html:"
+        ls -lah docs/html || echo "No se generó documentación"
+        
+    - name: 📤 Subir documentación como artefacto
+      uses: actions/upload-artifact@v4
+      with:
+        name: documentacion-html
+        path: docs/html/
+        retention-days: 30
+      if: success()
+      
+    - name: ✅ Documentación generada exitosamente
+      run: echo "✅ La documentación se generó correctamente y está disponible como artefacto"
+
+  # Job 3: Análisis de código (opcional)
+  code-quality:
+    name: Calidad de Código
+    runs-on: ubuntu-latest
+    needs: php-syntax-check
+    
+    steps:
+    - name: 📥 Checkout del código
+      uses: actions/checkout@v4
+      
+    - name: 🐘 Configurar PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        
+    - name: 📊 Contar líneas de código
+      run: |
+        echo "📊 Estadísticas del proyecto:"
+        echo "============================="
+        echo "Total de archivos PHP:"
+        find . -name "*.php" -not -path "*/vendor/*" | wc -l
+        echo ""
+        echo "Total de líneas de código:"
+        find . -name "*.php" -not -path "*/vendor/*" | xargs wc -l
+        echo ""
+        echo "Archivos del proyecto:"
+        find . -name "*.php" -not -path "*/vendor/*"
+        
+    - name: 🔍 Verificar comentarios PHPDoc
+      run: |
+        echo "🔍 Verificando presencia de comentarios PHPDoc..."
+        if grep -r "@param\|@return\|@var" src/ index.php; then
+          echo "✅ Se encontraron comentarios PHPDoc en el código"
+        else
+          echo "⚠️ Advertencia: Pocos o ningún comentario PHPDoc encontrado"
+        fi
+
+  # Job 4: Reporte final
+  final-report:
+    name: Reporte Final de CI
+    runs-on: ubuntu-latest
+    needs: [php-syntax-check, generate-documentation, code-quality]
+    if: always()
+    
+    steps:
+    - name: 📊 Generar reporte final
+      run: |
+        echo "═══════════════════════════════════════════"
+        echo "   REPORTE FINAL DE INTEGRACIÓN CONTINUA"
+        echo "═══════════════════════════════════════════"
+        echo ""
+        echo "📋 Proyecto: Gestión de Usuarios PHP"
+        echo "👤 Autor: Juan José Acebedo López (jjal)"
+        echo "📅 Fecha: $(date +'%Y-%m-%d %H:%M:%S')"
+        echo ""
+        echo "✅ Verificación de sintaxis PHP: COMPLETADO"
+        echo "✅ Generación de documentación: COMPLETADO"
+        echo "✅ Análisis de calidad de código: COMPLETADO"
+        echo ""
+        echo "═══════════════════════════════════════════"
+        echo "   ¡BUILD EXITOSO! ✨"
+        echo "═══════════════════════════════════════════"

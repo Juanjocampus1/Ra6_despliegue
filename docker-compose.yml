@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  phpdocumentor-jjal:
+    container_name: phpdocumentor-jjal
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - ./docs:/app/docs
+    command: ./vendor/bin/phpdoc -d . -t docs/html --template clean --ignore vendor/,docs/

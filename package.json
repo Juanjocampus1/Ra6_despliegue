@@ -1,0 +1,23 @@
+{
+  "name": "proyecto-php-jjal",
+  "version": "1.0.0",
+  "description": "Proyecto PHP con documentación automática para el módulo de Despliegue de Aplicaciones Web",
+  "main": "index.php",
+  "scripts": {
+    "docs": "phpdoc -c phpdoc.xml",
+    "docs:html": "phpdoc -d . -t docs/html --template clean",
+    "test": "php -l index.php && php -l src/usuario.php && php -l src/utilidades.php"
+  },
+  "keywords": [
+    "php",
+    "documentation",
+    "phpdocumentor",
+    "mysql",
+    "web-application"
+  ],
+  "author": "Juan José Acebedo López (jjal)",
+  "license": "MIT",
+  "devDependencies": {
+    "phpdocumentor/phpdocumentor": "^3.0"
+  }
+}
